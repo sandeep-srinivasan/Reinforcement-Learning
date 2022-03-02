@@ -22,3 +22,31 @@ State 7 - R
 State 8 - L
 
 Since the goal and the trap state always transitions to terminal state, S∞.
+
+2. Gambler's problem
+Problem statement: a gambler repeatedly places bets on the outcomes of a sequence of coin
+flips. If the flip is heads, she wins as many dollars as she has bet on that flip; if it is tails, she loses all the bet. The game ends when the gambler reaches her goal of making $100, or when she runs out of all her money. At each time, the gambler chooses how much of her money to bet on the next flip.
+This situation can be formulated as an undiscounted, episodic, finite MDP. The state is the
+gambler's capital, s ∈ {0, 1, 2, . . . , 99, 100}, and her actions are stakes (i.e., how much to bet) a ∈ {0, 1, . . . , min{s, 100 - s}}. The rewards are zero for all state transitions, except when the transition leads to the gambler reaching her $100 goal, in which case the reward is +1. Let ph be the probability that the coin flips heads.
+The results of the implementation using different methodologies are,
+
+![image](https://user-images.githubusercontent.com/42225976/156296421-6389bd51-3db8-4d29-b841-dc5aad637234.png)
+
+![image](https://user-images.githubusercontent.com/42225976/156296991-cc5271ab-45be-45f0-9b33-cdca7f3f2dc1.png)
+
+![image](https://user-images.githubusercontent.com/42225976/156297037-d6e032a5-c478-435f-ad42-9f3e9942e227.png)
+
+![image](https://user-images.githubusercontent.com/42225976/156297071-58d95109-c29a-402c-962a-1f48d6edf2fe.png)
+
+![image](https://user-images.githubusercontent.com/42225976/156297170-c057c0ee-0a42-4e78-b7ea-6407f5b4ad0c.png)
+
+3. Implemented Q-learning and SARSA on the Cliff Walking problem. This gridworld example compares Sarsa and Q-learning, highlighting the di↵erence between on-policy (Sarsa) and o↵-policy (Q-learning) methods.
+Problem statement: Consider the gridworld shown below. This is a standard undiscounted, episodic task, with start and goal states, and the usual actions causing movement up, down, right, and left. Reward is −1 on all transitions except those into the region marked “The Cliff.” Stepping into this region incurs a reward of −100 and sends the agent instantly back to the start.
+
+![image](https://user-images.githubusercontent.com/42225976/156297787-cfe3ed9d-a11a-4069-a247-d4c89ee62f8a.png)
+
+The graph to the right shows the performance of the Sarsa and Qlearning methods with ϵ-greedy action selection, ϵ = 0.1. After an initial transient, Q-learning learns values for the optimal policy, that which travels right along the edge of the cliff. Unfortunately, this results in its occasionally falling off of the cliff because of the ϵ-greedy action
+selection. Sarsa, on the other hand, takes the action selection into account and learns the longer but safer path through the upper part of the grid. Although Q-learning actually learns the values of the optimal policy, its online performance is worse than that of Sarsa, which learns the roundabout policy. Of course, if " were gradually reduced, then both methods would asymptotically converge to the optimal policy.
+
+![image](https://user-images.githubusercontent.com/42225976/156298036-c903f44d-1877-42f9-8ab4-230a1435d042.png)
+
